@@ -3,7 +3,11 @@ import React from "react";
 import { Link } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 import { CATEGORIES } from "../../assets/categories";
+import { useCartStore } from "../store/cart-items";
 const ListHeader = () => {
+
+
+  const {getItemCount} = useCartStore(); 
   return (
     <View style={[styles.headerContainer]}>
       <View style={styles.headerTop}>
@@ -29,7 +33,7 @@ const ListHeader = () => {
                   />
 
                   <View style={styles.badgeContainer}>
-                    <Text style={styles.badgeText}>{1}</Text>
+                    <Text style={styles.badgeText}>{getItemCount()}</Text>
                   </View>
                 </View>
               )}
