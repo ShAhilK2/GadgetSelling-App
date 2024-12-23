@@ -4,10 +4,22 @@ import { Link } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 import { CATEGORIES } from "../../assets/categories";
 import { useCartStore } from "../store/cart-items";
+import { supabase } from "../lib/supabase";
+import { Toast } from "react-native-toast-notifications";
 const ListHeader = () => {
 
 
   const {getItemCount} = useCartStore(); 
+
+  const handleSignOut = async()=>{
+    await supabase.auth.signOut();
+    Toast.show("Signout Successfull",{
+      type:"success",
+      placement:"top",
+      duration:1500
+    })
+
+  }
   return (
     <View style={[styles.headerContainer]}>
       <View style={styles.headerTop}>
@@ -39,7 +51,7 @@ const ListHeader = () => {
               )}
             </Pressable>
           </Link>
-            <TouchableOpacity style={styles.signOutButton}>
+            <TouchableOpacity style={styles.signOutButton} onPress={handleSignOut}>
           <FontAwesome name="sign-out" size={25} color="red"/>
         </TouchableOpacity>
         </View>
